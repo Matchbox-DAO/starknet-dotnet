@@ -64,6 +64,8 @@ public class Provider : IProvider
         const string path = "get_block?";
         Uri requestUri;
 
+
+        //Need private method for this, it is already used in GetBlock, GetCode and GetStorageAt
         if (identifier != null)
         {
             if (identifier.StartsWith("0x"))
@@ -101,6 +103,81 @@ public class Provider : IProvider
         var code = await response.Content.ReadAsAsync(typeof(Code));
 
         return (Code)code;
+    }
+
+    public async Task<string> GetStorageAt(string contractAddress, string key, string blockIdentifier)
+    {
+        const string path = "get_storage_at?";
+        Uri requestUri;
+
+        requestUri = new Uri(baseUrl + feederGatewayUrl + path + "contractAddress=" + contractAddress + "&key=" + key + "&blockNumber=" + blockIdentifier);
+
+        HttpResponseMessage response = await httpClient.GetAsync(requestUri);
+
+        var code = await response.Content.ReadAsAsync(typeof(string));
+
+        return (string)code;
+    }
+
+    public async Task<TransactionStatus> GetTransactionStatus(string txHash)
+    {
+        const string path = "get_transaction_status?";
+        Uri requestUri;
+
+        requestUri = new Uri(baseUrl + feederGatewayUrl + path + "transactionHash=" + txHash);
+
+        HttpResponseMessage response = await httpClient.GetAsync(requestUri);
+
+        var code = await response.Content.ReadAsAsync(typeof(TransactionStatus));
+
+        return (TransactionStatus)code;
+    }
+
+    public async Task<TransactionReceipt> GetTransactionReceipt(string txHash, string txId)
+    {
+        const string path = "get_transaction_receipt?";
+        Uri requestUri;
+
+        requestUri = new Uri("http://alpha4.starknet.io/feeder_gateway/get_transaction_receipt?transactionHash=0x37013e1cb9c133e6fe51b4b371b76b317a480f56d80576730754c1662582348");
+
+        HttpResponseMessage response = await httpClient.GetAsync(requestUri);
+
+        var code = await response.Content.ReadAsAsync(typeof(TransactionReceipt));
+
+        return (TransactionReceipt)code;
+    }
+
+    public async Task<Transaction> GetTransaction(string txHash)
+    {
+        const string path = "get_transaction?";
+        Uri requestUri;
+
+        requestUri = new Uri("http://alpha4.starknet.io/feeder_gateway/get_transaction?transactionHash=0x37013e1cb9c133e6fe51b4b371b76b317a480f56d80576730754c1662582348");
+
+        HttpResponseMessage response = await httpClient.GetAsync(requestUri);
+
+        var code = await response.Content.ReadAsAsync(typeof(Transaction));
+
+        return (Transaction)code;
+    }
+
+    public async Task<TransactionTrace> GetTransactionTrace(string txHash)
+    {
+        const string path = "get_transaction_trace?";
+        Uri requestUri;
+
+        requestUri = new Uri("http://alpha4.starknet.io/feeder_gateway/get_transaction_trace?transactionHash=0x37013e1cb9c133e6fe51b4b371b76b317a480f56d80576730754c1662582348");
+
+        HttpResponseMessage response = await httpClient.GetAsync(requestUri);
+
+        var code = await response.Content.ReadAsAsync(typeof(TransactionTrace));
+
+        return (TransactionTrace)code;
+    }
+
+    public async Task<TransactionStatus> DeployContract(string txHash)
+    {
+        throw new NotImplementedException();
     }
 }
 

@@ -1,9 +1,11 @@
-﻿namespace StarkNet.Core.Abstractions;
-
-public class Transaction
+﻿namespace StarkNet.Core.Abstractions
 {
-    public string contract_address { get; set; }
-    public string entry_point_selector { get; set; }
-    public string entry_point_type { get; set; }
-    public List<string> calldata { get; set; }
+    public class Transaction
+    {
+        public string status { get; set; }
+        public string block_hash { get; set; }
+        public int? block_number { get; set; }
+        public string transaction_index { get; set; }
+        public TransactionChild transaction { get; set; }
+    }
 }
