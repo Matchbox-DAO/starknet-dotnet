@@ -11,5 +11,6 @@
         public string timestamp { get; set; }
         public List<TransactionReceipts> transaction_receipts { get; set; }
         public string sequencer_address { get; set; }
+        public string gas_price { get; set; }
     }
 }
