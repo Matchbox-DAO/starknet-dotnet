@@ -1,7 +1,7 @@
 namespace StarkNet.Core.Abstractions;
 
 public interface IProvider
-{    
+{
     string baseUrl {get; set;}
     string feederGatewayUrl {get; set;}
     string gatewayUrl {get; set;}
