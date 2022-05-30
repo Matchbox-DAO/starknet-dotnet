@@ -4,7 +4,7 @@ public class Program
 {
     static async Task Main() {
         var httpClient = new HttpClient();
-        var provider = new Provider(httpClient);
+        var provider = new HttpProvider(httpClient);
 
         //var isalive = await provider.IsAlive().ConfigureAwait(false);
         //var contractAddresses = await provider.GetContractAddresses().ConfigureAwait(false);
@@ -15,5 +15,8 @@ public class Program
         //var transaction = await provider.GetTransaction("0x37013e1cb9c133e6fe51b4b371b76b317a480f56d80576730754c1662582348");
         //var transactionReceipt = await provider.GetTransactionReceipt("0x37013e1cb9c133e6fe51b4b371b76b317a480f56d80576730754c1662582348", "");
         //var transactionStatus = await provider.GetTransactionStatus("0x37013e1cb9c133e6fe51b4b371b76b317a480f56d80576730754c1662582348");
+
+        string text = System.IO.File.ReadAllText(@"C:\Users\tr\Documents\repos\starknet-dotnet\tests\StarkNet.Core.LocalTests\json1.json");
+        var add_transaction = await provider.AddTransaction(text);
     }
 }

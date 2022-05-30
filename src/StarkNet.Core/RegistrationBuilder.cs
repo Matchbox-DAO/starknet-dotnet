@@ -12,7 +12,7 @@ public static class RegistartionBuilder
         Guard.IsNotNull(services, nameof(services));
         //Guard.IsNotNull(configuration, nameof(configuration));
         
-        services.AddHttpClient<IProvider, Provider>();
+        services.AddHttpClient<IProvider, HttpProvider>();
 
         return services;
     }
