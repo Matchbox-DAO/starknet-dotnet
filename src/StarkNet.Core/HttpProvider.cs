@@ -39,9 +39,8 @@ public class HttpProvider : IProvider
     public async Task<bool> IsAlive()
     {
         const string path = "/is_alive";
-        Uri requestUri;
 
-        requestUri = new Uri(baseUrl + feederGatewayUrl + path);
+        Uri requestUri = new Uri(baseUrl + feederGatewayUrl + path);
 
         HttpResponseMessage response = await httpClient.GetAsync(requestUri);
 
@@ -51,9 +50,8 @@ public class HttpProvider : IProvider
     public async Task<ContractAddresses> GetContractAddresses()
     {
         const string path = "/get_contract_addresses";
-        Uri requestUri;
 
-        requestUri = new Uri(baseUrl + feederGatewayUrl + path);
+        Uri requestUri = new Uri(baseUrl + feederGatewayUrl + path);
 
         HttpResponseMessage response = await httpClient.GetAsync(requestUri);
 
@@ -67,7 +65,7 @@ public class HttpProvider : IProvider
         const string path = "/get_block?";
         Uri requestUri;
 
-        if (blockIdentifier != null)
+        if (String.IsNullOrWhiteSpace(blockIdentifier))
         {
             var identifier = formatBlockIdentifier(blockIdentifier);
             requestUri = new Uri(baseUrl + feederGatewayUrl + path + identifier);
@@ -89,7 +87,7 @@ public class HttpProvider : IProvider
         const string path = "/get_code?";
         Uri requestUri;
 
-        if (!String.IsNullOrWhiteSpace(blockIdentifier))
+        if (String.IsNullOrWhiteSpace(blockIdentifier))
         {
             var identifier = formatBlockIdentifier(blockIdentifier);
             requestUri = new Uri(baseUrl + feederGatewayUrl + path + "contractAddress=" + contractAddress + identifier);
@@ -109,10 +107,9 @@ public class HttpProvider : IProvider
     public async Task<string> GetStorageAt(string contractAddress, string key, string blockIdentifier)
     {
         const string path = "/get_storage_at?";
-        Uri requestUri;
         
         var identifier = formatBlockIdentifier(blockIdentifier);
-        requestUri = new Uri(baseUrl + feederGatewayUrl + path + "contractAddress=" + contractAddress + "&key=" + key + identifier);
+        Uri requestUri = new Uri(baseUrl + feederGatewayUrl + path + "contractAddress=" + contractAddress + "&key=" + key + identifier);
 
         HttpResponseMessage response = await httpClient.GetAsync(requestUri);
 
@@ -124,9 +121,8 @@ public class HttpProvider : IProvider
     public async Task<TransactionStatus> GetTransactionStatus(string txHash)
     {
         const string path = "/get_transaction_status?";
-        Uri requestUri;
 
-        requestUri = new Uri(baseUrl + feederGatewayUrl + path + "transactionHash=" + txHash);
+        Uri requestUri = new Uri(baseUrl + feederGatewayUrl + path + "transactionHash=" + txHash);
 
         HttpResponseMessage response = await httpClient.GetAsync(requestUri);
 
@@ -139,9 +135,8 @@ public class HttpProvider : IProvider
     public async Task<TransactionReceipt> GetTransactionReceipt(string txHash, string txId)
     {
         const string path = "/get_transaction_receipt?";
-        Uri requestUri;
 
-        requestUri = new Uri(baseUrl + feederGatewayUrl + path + "transactionHash=" + txHash);
+        Uri requestUri = new Uri(baseUrl + feederGatewayUrl + path + "transactionHash=" + txHash);
 
         HttpResponseMessage response = await httpClient.GetAsync(requestUri);
 
@@ -154,9 +149,8 @@ public class HttpProvider : IProvider
     public async Task<Transaction> GetTransaction(string txHash)
     {
         const string path = "/get_transaction?";
-        Uri requestUri;
 
-        requestUri = new Uri(baseUrl + feederGatewayUrl + path + "transactionHash=" + txHash);
+        Uri requestUri = new Uri(baseUrl + feederGatewayUrl + path + "transactionHash=" + txHash);
 
         HttpResponseMessage response = await httpClient.GetAsync(requestUri);
 
@@ -169,9 +163,8 @@ public class HttpProvider : IProvider
     public async Task<TransactionTrace> GetTransactionTrace(string txHash)
     {
         const string path = "/get_transaction_trace?";
-        Uri requestUri;
 
-        requestUri = new Uri(baseUrl + feederGatewayUrl + path + "transactionHash=" + txHash);
+        Uri requestUri = new Uri(baseUrl + feederGatewayUrl + path + "transactionHash=" + txHash);
 
         HttpResponseMessage response = await httpClient.GetAsync(requestUri);
 
@@ -183,9 +176,8 @@ public class HttpProvider : IProvider
     public async Task<string> AddTransaction(string body)
     {
         const string path = "/add_transaction";
-        Uri requestUri;
 
-        requestUri = new Uri(baseUrl + gatewayUrl + path);
+        Uri requestUri = new Uri(baseUrl + gatewayUrl + path);
 
         var stringContent = new StringContent(body, System.Text.Encoding.UTF8, "application/json");
 
@@ -193,7 +185,7 @@ public class HttpProvider : IProvider
 
         var code = await response.Content.ReadAsStringAsync();
 
-        return (string)code;
+        return code;
     }
 
     #endregion

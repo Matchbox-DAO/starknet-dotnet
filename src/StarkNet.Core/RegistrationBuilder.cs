@@ -7,7 +7,7 @@ namespace StarkNet.Core;
 
 public static class RegistartionBuilder
 {
-    public static IServiceCollection RegisterStarkNetAPI(this IServiceCollection services)//, IConfiguration configuration)
+    public static IServiceCollection RegisterStarkNetHttpProvider(this IServiceCollection services)//, IConfiguration configuration)
     {
         Guard.IsNotNull(services, nameof(services));
         //Guard.IsNotNull(configuration, nameof(configuration));

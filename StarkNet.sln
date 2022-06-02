@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarkNet.Core.Abstractions"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4A4C087D-5EAD-41EA-8A83-A891579FCF45}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarkNet.Core.FunctionalTests", "tests\StarkNet.Core.LocalTests\StarkNet.Core.FunctionalTests.csproj", "{A977620C-9815-4C95-8BB8-8EAE8F92767C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarkNet.Core.IntegrationTests", "tests\StarkNet.Core.LocalTests\StarkNet.Core.IntegrationTests.csproj", "{A977620C-9815-4C95-8BB8-8EAE8F92767C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarkNet.Core.UnitTests", "tests\StarkNet.Core.UnitTests\StarkNet.Core.UnitTests.csproj", "{DA7DECA0-5877-4C35-9F4D-C8A3888CFDF4}"
 EndProject
@@ -19,9 +19,6 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D95241F1-19A0-4B25-9C93-F8DB60049543}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
