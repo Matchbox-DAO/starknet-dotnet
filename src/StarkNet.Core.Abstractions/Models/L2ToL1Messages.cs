@@ -1,9 +1,14 @@
-﻿namespace StarkNet.Core.Abstractions
+﻿using System.Text.Json.Serialization;
+
+namespace StarkNet.Core.Abstractions
 {
     public class L2ToL1Messages
     {
-        public string from_address { get; set; }
-        public string to_address { get; set; }
-        public List<string> payload { get; set; }
+        [JsonPropertyName("from_address")]
+        public string FromAddress { get; set; }
+        [JsonPropertyName("to_address")]
+        public string ToAddress { get; set; }
+        [JsonPropertyName("payload")]
+        public List<string> Payload { get; set; }
     }
 }

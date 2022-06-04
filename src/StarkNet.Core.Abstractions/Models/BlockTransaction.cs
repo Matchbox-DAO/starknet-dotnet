@@ -1,9 +1,15 @@
-﻿namespace StarkNet.Core.Abstractions;
+﻿using System.Text.Json.Serialization;
+
+namespace StarkNet.Core.Abstractions;
 
 public class BlockTransaction
 {
-    public string contract_address { get; set; }
-    public string entry_point_selector { get; set; }
-    public string entry_point_type { get; set; }
-    public List<string> calldata { get; set; }
+    [JsonPropertyName("contract_address")]
+    public string ContractAddress { get; set; }
+    [JsonPropertyName("entry_point_selector")]
+    public string EntryPointSelector { get; set; }
+    [JsonPropertyName("entry_point_type")]
+    public string EntryPointType { get; set; }
+    [JsonPropertyName("calldata")]
+    public List<string> Calldata { get; set; }
 }

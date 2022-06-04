@@ -1,16 +1,28 @@
-﻿namespace StarkNet.Core.Abstractions
+﻿using System.Text.Json.Serialization;
+
+namespace StarkNet.Core.Abstractions
 {
     public class Block
     {
-        public string block_hash { get; set; }
-        public string parent_block_hash { get; set; }
-        public int block_number { get; set; }
-        public string state_root { get; set; }
-        public string status { get; set; }
-        public List<BlockTransaction> transations { get; set; }
-        public string timestamp { get; set; }
-        public List<TransactionReceipts> transaction_receipts { get; set; }
-        public string sequencer_address { get; set; }
-        public string gas_price { get; set; }
+        [JsonPropertyName("block_hash")]
+        public string BlockHash { get; set; }
+        [JsonPropertyName("parent_block_hash")]
+        public string ParentBlockHash { get; set; }
+        [JsonPropertyName("block_number")]
+        public int BlockNumber { get; set; }
+        [JsonPropertyName("state_root")]
+        public string StateRoot { get; set; }
+        [JsonPropertyName("status")]
+        public string Status { get; set; }
+        [JsonPropertyName("transations")]
+        public List<BlockTransaction> Transactions { get; set; }
+        [JsonPropertyName("timestamp")]
+        public int Timestamp { get; set; }
+        [JsonPropertyName("transaction_receipts")]
+        public List<TransactionReceipt> TransactionReceipt { get; set; }
+        [JsonPropertyName("sequencer_address")]
+        public string SequencerAddress { get; set; }
+        [JsonPropertyName("gas_price")]
+        public string GasPrice { get; set; }
     }
 }

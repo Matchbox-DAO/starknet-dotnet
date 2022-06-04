@@ -1,9 +1,14 @@
-﻿namespace StarkNet.Core.Abstractions
+﻿using System.Text.Json.Serialization;
+
+namespace StarkNet.Core.Abstractions
 {
     public class ExecutionRessources
     {
-        public int n_steps { get; set; }
-        public BuiltinInstanceCounter builtin_instance_counter { get; set; }
-        public int n_memory_holes { get; set; }
+        [JsonPropertyName("n_steps")]
+        public int NSteps { get; set; }
+        [JsonPropertyName("builtin_instance_counter")]
+        public BuiltinInstanceCounter BuiltinInstanceCounter { get; set; }
+        [JsonPropertyName("n_memory_holes")]
+        public int NMemoryHoles { get; set; }
     }
 }

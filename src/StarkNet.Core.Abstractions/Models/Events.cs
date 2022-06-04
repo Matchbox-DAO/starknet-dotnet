@@ -1,9 +1,14 @@
-﻿namespace StarkNet.Core.Abstractions
+﻿using System.Text.Json.Serialization;
+
+namespace StarkNet.Core.Abstractions
 {
     public class Events
     {
-        public string from_address { get; set; }
-        public List<string> keys { get; set; }
-        public List<string> data { get; set; }
+        [JsonPropertyName("from_address")]
+        public string FromAddress { get; set; }
+        [JsonPropertyName("keys")]
+        public List<string> Keys { get; set; }
+        [JsonPropertyName("data")]
+        public List<string> Data { get; set; }
     }
 }

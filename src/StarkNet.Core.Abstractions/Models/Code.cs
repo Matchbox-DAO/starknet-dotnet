@@ -1,8 +1,12 @@
-﻿namespace StarkNet.Core.Abstractions
+﻿using System.Text.Json.Serialization;
+
+namespace StarkNet.Core.Abstractions
 {
     public class Code
     {
-        public List<string> bytecode { get; set; }
-        public List<AbiFunctions> abi { get; set; }
+        [JsonPropertyName("bytecode")]
+        public List<string> Bytecode { get; set; }
+        [JsonPropertyName("abi")]
+        public List<AbiFunctions> Abi { get; set; }
     }
 }

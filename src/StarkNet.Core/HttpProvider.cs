@@ -1,4 +1,6 @@
-﻿using Microsoft.Toolkit.Diagnostics;
+﻿using System.Net.Http.Json;
+
+using Microsoft.Toolkit.Diagnostics;
 using StarkNet.Core.Abstractions;
 
 namespace StarkNet.Core;
@@ -65,7 +67,7 @@ public class HttpProvider : IProvider
         const string path = "/get_block?";
         Uri requestUri;
 
-        if (String.IsNullOrWhiteSpace(blockIdentifier))
+        if (!String.IsNullOrWhiteSpace(blockIdentifier))
         {
             var identifier = formatBlockIdentifier(blockIdentifier);
             requestUri = new Uri(baseUrl + feederGatewayUrl + path + identifier);
@@ -77,20 +79,19 @@ public class HttpProvider : IProvider
 
         HttpResponseMessage response = await httpClient.GetAsync(requestUri);
 
-        var block = await response.Content.ReadAsAsync(typeof(Block));
-
-        return (Block)block;
+        return await response.Content.ReadFromJsonAsync<Block>();
     }
 
-    public async Task<Code> GetCode(string contractAddress, string? blockIdentifier = null)
+    //Check behavior with blockNumber
+    public async Task<Code> GetCode(string contractAddress, string? blockNumber = null)
     {
         const string path = "/get_code?";
         Uri requestUri;
 
-        if (String.IsNullOrWhiteSpace(blockIdentifier))
+        if (!String.IsNullOrWhiteSpace(blockNumber))
         {
-            var identifier = formatBlockIdentifier(blockIdentifier);
-            requestUri = new Uri(baseUrl + feederGatewayUrl + path + "contractAddress=" + contractAddress + identifier);
+            var identifier = formatBlockIdentifier(blockNumber);
+            requestUri = new Uri(baseUrl + feederGatewayUrl + path + "contractAddress=" + contractAddress + "&blockNumber=" + blockNumber);
         }
         else
         {
@@ -99,9 +100,7 @@ public class HttpProvider : IProvider
 
         HttpResponseMessage response = await httpClient.GetAsync(requestUri);
 
-        var code = await response.Content.ReadAsAsync(typeof(Code));
-
-        return (Code)code;
+        return await response.Content.ReadFromJsonAsync<Code>();
     }
 
     public async Task<string> GetStorageAt(string contractAddress, string key, string blockIdentifier)
@@ -113,9 +112,9 @@ public class HttpProvider : IProvider
 
         HttpResponseMessage response = await httpClient.GetAsync(requestUri);
 
-        var code = await response.Content.ReadAsAsync(typeof(string));
+        var storage = await response.Content.ReadAsAsync(typeof(string));
 
-        return (string)code;
+        return (string)storage;
     }
 
     public async Task<TransactionStatus> GetTransactionStatus(string txHash)
@@ -126,9 +125,7 @@ public class HttpProvider : IProvider
 
         HttpResponseMessage response = await httpClient.GetAsync(requestUri);
 
-        var code = await response.Content.ReadAsAsync(typeof(TransactionStatus));
-
-        return (TransactionStatus)code;
+        return await response.Content.ReadFromJsonAsync<TransactionStatus>();
     }
 
     //txId compatibility
@@ -140,9 +137,7 @@ public class HttpProvider : IProvider
 
         HttpResponseMessage response = await httpClient.GetAsync(requestUri);
 
-        var code = await response.Content.ReadAsAsync(typeof(TransactionReceipt));
-
-        return (TransactionReceipt)code;
+        return await response.Content.ReadFromJsonAsync<TransactionReceipt>();
     }
 
     //txid ?
@@ -154,9 +149,7 @@ public class HttpProvider : IProvider
 
         HttpResponseMessage response = await httpClient.GetAsync(requestUri);
 
-        var code = await response.Content.ReadAsAsync(typeof(Transaction));
-
-        return (Transaction)code;
+        return await response.Content.ReadFromJsonAsync<Transaction>();
     }
 
     //txid ?
@@ -168,9 +161,7 @@ public class HttpProvider : IProvider
 
         HttpResponseMessage response = await httpClient.GetAsync(requestUri);
 
-        var code = await response.Content.ReadAsAsync(typeof(TransactionTrace));
-
-        return (TransactionTrace)code;
+        return await response.Content.ReadFromJsonAsync<TransactionTrace>();
     }
 
     public async Task<string> AddTransaction(string body)
@@ -193,6 +184,7 @@ public class HttpProvider : IProvider
     #region PRIVATE
     private string formatBlockIdentifier(string blockIdentifier)
     {
+        Guard.IsNotNull(blockIdentifier, nameof(blockIdentifier));
         if (blockIdentifier.StartsWith("0x"))
         {
             return ($"&blockHash={blockIdentifier}");

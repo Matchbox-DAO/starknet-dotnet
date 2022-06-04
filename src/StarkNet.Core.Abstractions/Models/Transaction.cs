@@ -1,11 +1,18 @@
-﻿namespace StarkNet.Core.Abstractions
+﻿using System.Text.Json.Serialization;
+
+namespace StarkNet.Core.Abstractions
 {
     public class Transaction
     {
-        public string status { get; set; }
-        public string block_hash { get; set; }
-        public int? block_number { get; set; }
-        public string transaction_index { get; set; }
-        public TransactionChild transaction { get; set; }
+        [JsonPropertyName("status")]
+        public string Status { get; set; }
+        [JsonPropertyName("block_hash")]
+        public string BlockHash { get; set; }
+        [JsonPropertyName("block_number")]
+        public int? BlockNumber { get; set; }
+        [JsonPropertyName("transaction_index")]
+        public int TransactionIndex { get; set; }
+        [JsonPropertyName("transaction")]
+        public TransactionChild TransactionChild { get; set; }
     }
 }

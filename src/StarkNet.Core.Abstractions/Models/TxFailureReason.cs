@@ -1,9 +1,14 @@
-﻿namespace StarkNet.Core.Abstractions
+﻿using System.Text.Json.Serialization;
+
+namespace StarkNet.Core.Abstractions
 {
     public class TxFailureReason
     {
-        public int tx_id { get; set; }
-        public string code { get; set; }
-        public string? error_message { get; set; }
+        [JsonPropertyName("tx_id")]
+        public int TxId { get; set; }
+        [JsonPropertyName("code")]
+        public string Code { get; set; }
+        [JsonPropertyName("error_message")]
+        public string? ErrorMessage { get; set; }
     }
 }

@@ -1,11 +1,17 @@
-﻿namespace StarkNet.Core.Abstractions
+﻿using System.Text.Json.Serialization;
+
+namespace StarkNet.Core.Abstractions
 {
     public class AbiFunctions
     {
-        public List<Variables> inputs { get; set; }
-        public string name { get; set; }
-        public List<Variables> outputs { get; set; }
-        public string type { get; set; }
+        [JsonPropertyName("inputs")]
+        public List<Variables> Inputs { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+        [JsonPropertyName("outputs")]
+        public List<Variables> Outputs { get; set; }
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
 
         public struct Variables
         {
