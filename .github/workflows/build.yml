@@ -1,0 +1,24 @@
+name: build and test
+
+on:
+- push
+- pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v2
+      with:
+        # Use 6.0 for now, setup test matrix in the future
+        dotnet-version: 6.0.x
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Check formatting and style
+      run: dotnet format --verify-no-changes
+    - name: Build release
+      run: dotnet build --configuration Release --no-restore
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
