@@ -5,7 +5,7 @@ namespace StarkNet.Core.Abstractions;
 public class ContractAddresses
 {
     [JsonPropertyName("Starknet")]
-    public string Starknet {get; set;}
+    public string Starknet { get; set; }
     [JsonPropertyName("GpsStatementVerifier")]
-    public string GpsStatementVerifier {get; set;}
+    public string GpsStatementVerifier { get; set; }
 }

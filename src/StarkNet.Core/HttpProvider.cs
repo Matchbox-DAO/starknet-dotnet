@@ -1,6 +1,7 @@
 ﻿using System.Net.Http.Json;
 
 using Microsoft.Toolkit.Diagnostics;
+
 using StarkNet.Core.Abstractions;
 
 namespace StarkNet.Core;
@@ -14,19 +15,19 @@ public class HttpProvider : IProvider
 
     public HttpProvider()
     {
-        Guard.IsNotNull(httpClient,nameof(httpClient));
+        Guard.IsNotNull(httpClient, nameof(httpClient));
     }
 
     public HttpProvider(HttpClient _httpClient)
     {
-        Guard.IsNotNull(_httpClient,nameof(_httpClient));
+        Guard.IsNotNull(_httpClient, nameof(_httpClient));
 
         httpClient = _httpClient;
     }
 
     public HttpProvider(HttpClient _httpClient, string _baseUrl, string _feederGatewayUrl, string _gatewayUrl, string _account)
     {
-        Guard.IsNotNull(_httpClient,nameof(_httpClient));
+        Guard.IsNotNull(_httpClient, nameof(_httpClient));
         Guard.IsNotNull(_baseUrl, nameof(_baseUrl));
         Guard.IsNotNull(_feederGatewayUrl, nameof(_feederGatewayUrl));
         Guard.IsNotNull(_gatewayUrl, nameof(_gatewayUrl));
@@ -58,7 +59,7 @@ public class HttpProvider : IProvider
         HttpResponseMessage response = await httpClient.GetAsync(requestUri);
 
         var contractAddresses = await response.Content.ReadAsAsync(typeof(ContractAddresses));
-        
+
         return (ContractAddresses)contractAddresses;
     }
 
@@ -106,7 +107,7 @@ public class HttpProvider : IProvider
     public async Task<string> GetStorageAt(string contractAddress, string key, string blockIdentifier)
     {
         const string path = "/get_storage_at?";
-        
+
         var identifier = formatBlockIdentifier(blockIdentifier);
         Uri requestUri = new Uri(baseUrl + feederGatewayUrl + path + "contractAddress=" + contractAddress + "&key=" + key + identifier);
 

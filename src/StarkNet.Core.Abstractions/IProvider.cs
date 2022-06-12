@@ -1,10 +1,10 @@
 namespace StarkNet.Core.Abstractions;
 
 public interface IProvider
-{    
-    string baseUrl {get; set;}
-    string feederGatewayUrl {get; set;}
-    string gatewayUrl {get; set;}
+{
+    string baseUrl { get; set; }
+    string feederGatewayUrl { get; set; }
+    string gatewayUrl { get; set; }
 
     Task<bool> IsAlive();
     Task<Block> GetBlock(string blockIdentifier);

@@ -2,7 +2,8 @@
 
 public class Program
 {
-    static async Task Main() {
+    static async Task Main()
+    {
         var httpClient = new HttpClient();
         var provider = new HttpProvider(httpClient);
 

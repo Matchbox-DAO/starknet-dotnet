@@ -15,8 +15,8 @@ namespace StarkNet.Core.Abstractions
 
         public struct Variables
         {
-            string name;
-            string type;
+            readonly string name;
+            readonly string type;
         }
     }
 }
