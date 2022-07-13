@@ -4,6 +4,7 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 using Microsoft.Toolkit.Diagnostics;
+
 using StarkNet.Core.Abstractions;
 
 namespace StarkNet.Core
@@ -181,6 +182,22 @@ namespace StarkNet.Core
             var code = await response.Content.ReadAsStringAsync();
 
             return code;
+        }
+
+        #endregion
+
+        #region PRIVATE
+        private string formatBlockIdentifier(string blockIdentifier)
+        {
+            Guard.IsNotNull(blockIdentifier, nameof(blockIdentifier));
+            if (blockIdentifier.StartsWith("0x"))
+            {
+                return ($"&blockHash={blockIdentifier}");
+            }
+            else
+            {
+                return ($"&blockNumber={blockIdentifier}");
+            }
         }
         #endregion
     }

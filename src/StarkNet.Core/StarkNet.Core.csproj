@@ -13,11 +13,11 @@
     <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <OutputType>Library</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
     <LangVersion>9.0</LangVersion>
-  </PropertyGroup>
+    </PropertyGroup>
 
 </Project>
