@@ -17,6 +17,6 @@ public interface IProvider
     Task<TransactionReceipt> GetTransactionReceipt(string txHash, string txId);
     Task<TransactionTrace> GetTransactionTrace(string txHash);
     Task<ContractAddresses> GetContractAddresses();
-    Task<string> AddTransaction(string body);
+    Task<string> AddTransaction(string tx);
 }
 }

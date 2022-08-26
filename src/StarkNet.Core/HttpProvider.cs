@@ -1,11 +1,21 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Text;
 using System.Threading.Tasks;
 
 using Microsoft.Toolkit.Diagnostics;
 
+using Newtonsoft.Json;
+
 using StarkNet.Core.Abstractions;
+
+using Nethereum.Web3;
+using Nethereum.Util;
+using System.Collections.Generic;
+using Nethereum.Signer;
+using Nethereum.Hex.HexConvertors.Extensions;
+using Nethereum.ABI.Encoders;
 
 namespace StarkNet.Core
 {
@@ -15,6 +25,7 @@ namespace StarkNet.Core
         public string baseUrl { get; set; } = "http://alpha4.starknet.io";
         public string feederGatewayUrl { get; set; } = "/feeder_gateway";
         public string gatewayUrl { get; set; } = "/gateway";
+        public Signer signer { get; set; }
 
         public HttpProvider()
         {
@@ -169,15 +180,19 @@ namespace StarkNet.Core
             return await response.Content.ReadFromJsonAsync<TransactionTrace>();
         }
 
-        public async Task<string> AddTransaction(string body)
+        public async Task<string> AddTransaction(string payload)
         {
             const string path = "/add_transaction";
 
             Uri requestUri = new Uri(baseUrl + gatewayUrl + path);
 
-            var stringContent = new StringContent(body, System.Text.Encoding.UTF8, "application/json");
+            //PostTransaction payload = new PostTransaction();
+            
+            //var stringPayload = JsonConvert.SerializeObject(payload);
 
-            HttpResponseMessage response = await httpClient.PostAsync(requestUri, stringContent);
+            var httpContent = new StringContent(payload, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await httpClient.PostAsync(requestUri, httpContent);
 
             var code = await response.Content.ReadAsStringAsync();
 
